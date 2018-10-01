@@ -2,19 +2,19 @@
 #include <stdlib.h>
 #include <string.h>
 #include "argparse.h"
+#include "finsh.h" 
 
 static const char *const usages[] = {
-    "test_argparse [options] [[--] args]",
-    "test_argparse [options]",
+    "argparse_test [options] [[--] args]",
+    "argparse_test [options]",
     NULL,
 };
 
-#define PERM_READ  (1<<0)
-#define PERM_WRITE (1<<1)
-#define PERM_EXEC  (1<<2)
+#define PERM_READ (1 << 0)
+#define PERM_WRITE (1 << 1)
+#define PERM_EXEC (1 << 2)
 
-int
-main(int argc, const char **argv)
+int argparse_test(int argc, const char **argv)
 {
     int force = 0;
     int test = 0;
@@ -51,15 +51,21 @@ main(int argc, const char **argv)
         printf("int_num: %d\n", int_num);
     if (flt_num != 0)
         printf("flt_num: %g\n", flt_num);
-    if (argc != 0) {
+
+    if (argc != 0)
+    {
         printf("argc: %d\n", argc);
         int i;
-        for (i = 0; i < argc; i++) {
+        for (i = 0; i < argc; i++)
+        {
             printf("argv[%d]: %s\n", i, *(argv + i));
         }
     }
-    if (perms) {
+    if (perms)
+    {
         printf("perms: %d\n", perms);
     }
+
     return 0;
 }
+MSH_CMD_EXPORT_ALIAS(argparse_test, argparse_test, argparse msh cmd demo.); 
